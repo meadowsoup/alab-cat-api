@@ -11,7 +11,11 @@ const progressBar = document.getElementById("progressBar");
 const getFavoritesBtn = document.getElementById("getFavoritesBtn");
 
 // Step 0: Store your API key here for reference and easy access.
-const API_KEY = "";
+const API_KEY = "live_OTSljFTDuXBxjbeM88pOACuCU0Iu6YA4udNYQ3aX2Rj50GdXq1nlTW7sL086iEZ4";
+axios.interceptors.request.use(config => {
+     console.log(new Date());
+     return config
+})
 
 /**
  * 1. Create an async function "initialLoad" that does the following:
