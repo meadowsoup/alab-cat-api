@@ -1,4 +1,4 @@
-import * as Carousel from "";
+import * as Carousel from "./Carousel.js";
 // import axios from "axios";
 
 // The breed selection input element.
@@ -28,14 +28,15 @@ axios.interceptors.request.use(config => {
 async function initialLoad() {
      try {
           // send a request to the cat api
-          const res = await fetch("https://api.thecatapi.com/v1/breeds", {
-               headers: {
-                    'x-api-key': API_KEY
-               }
-          });
+          const res = await axios.get("/breeds");
           // get the data from the response!
-          const breeds = await res.json();
+          const breeds = res.data;
+          
+          breedSelect.innerHTML = breeds.map(
+               (breed) => `<option value = ${breed.id}>${breed.name}</option>`
+          )
           console.log(breeds);
+          breedSelect()
           
      } catch (e) {
           console.error(e);
@@ -58,6 +59,14 @@ initialLoad();
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 
+breedSelect.addEventListener("change", breedSelection);
+
+async function breedSelection() {
+     try {
+          const breedID = breedSelect.value
+     const res = await axios.get(`https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=beng&api_key=${breed}`)
+     }
+}
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
